@@ -2,6 +2,15 @@ class Schema {
     constructor(doc) {
         this.name = doc.Name;
         this.tables = Object.entries(doc.Tables).map(([name, value]) => new Table(this.name, name, value));
+        // add child/parent relations
+        this.tables.forEach(table => {
+            if (table.parents && table.parents.length) {
+                table.parents.forEach(parent => {
+                    const parentTable = this.tables.find(t => t.name === parent);
+                    parentTable.addChild(table.name);
+                });
+            }
+        });
     }
 }
 
@@ -11,6 +20,11 @@ class Table {
         this.name = name;
         this.columns = Object.entries(table.Columns).map(([name, value]) => new Column(name, value));
         this.parents = table.ForeignKeys && table.ForeignKeys.map(key => key.substr(0, key.indexOf('(')));
+        this.childs = [];
+    }
+
+    addChild(table) {
+        this.childs.push(table);
     }
 }
 

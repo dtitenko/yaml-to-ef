@@ -46,14 +46,20 @@ namespace YamlToEF.${model.name}
 
 function _buildClass(table) {
     const props = table.columns.map(column => _buildProp(column));
+    const collections = table.childs.map(child => _buildCollection(child));
     return `
     [Table("${table.name}", Schema = "${table.schema}")]
     internal class ${table.name}
     {
 ${props.join('\n')}
+${collections.join('\n')}
     }`;
 }
 
 function _buildProp(column) {
     return `        public ${column.type} ${column.name} { get; set; }`;
+}
+
+function _buildCollection(child) {
+    return `        public List<${child}> ${child} { get; set; } = new List<${child}>();`;
 }
