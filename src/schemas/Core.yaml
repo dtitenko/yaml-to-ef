@@ -1,0 +1,22 @@
+Name: Core
+Tables:
+  Customers:
+    Columns:
+      Id: uniqueidentifier
+      Name: nvarchar(255)
+      CreatedAt: datetime
+    Indexes:
+    - PrimaryKey(Id)
+    - Index(Name)
+  Orders:
+    Columns:
+      Id: uniqueidentifier
+      CustomerId: uniqueidentifier
+      ItemName: varchar(100)
+      ItemDescription: varchar(255)
+      CreatedAt: datetime
+      IsActive: bool Null
+    ForeignKeys:
+    - Customers(CustomerId->Id)
+    Indexes:
+    - PrimaryKey(Id)

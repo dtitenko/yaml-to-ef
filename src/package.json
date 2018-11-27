@@ -1,0 +1,15 @@
+{
+  "name": "yaml-to-ef",
+  "version": "1.0.0",
+  "description": "EF POCO generator from Yaml file",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+    "generator": "node index"
+  },
+  "author": "Dmitry Titenko",
+  "license": "ISC",
+  "devDependencies": {
+    "js-yaml": "3.12.0"
+  }
+}

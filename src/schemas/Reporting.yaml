@@ -1,0 +1,12 @@
+Name: Reporting
+Tables:
+  Orders:
+    Columns:
+      Id: uniqueidentifier
+      CustomerName: varchar(100)
+      ItemName: varchar(100)
+      ItemDescription: varchar(255)
+      CreatedAt: datetime
+      IsActive: bool Null
+    Indexes:
+    - PrimaryKey(Id)
